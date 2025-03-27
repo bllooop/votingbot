@@ -1,0 +1,97 @@
+Watchdog 2025/03/27 21:18:26 [INFO] Start
+Watchdog 2025/03/27 21:18:26 (INFO): using "/Users/royalblue/Documents/learning/votingbot/vote_db/config.yml" cluster config for instance "instance001"
+started
+2025-03-27 21:18:26.272 [56044] main/105/interactive main.cc:498 I> Tarantool 3.3.1-0-g91caac3 Darwin-arm64-Release
+2025-03-27 21:18:26.273 [56044] main/105/interactive main.cc:500 I> log level 5 (INFO)
+2025-03-27 21:18:26.273 [56044] main/105/interactive gc.c:131 I> wal/engine cleanup is paused
+2025-03-27 21:18:26.273 [56044] main/105/interactive tuple.c:411 I> mapping 268435456 bytes for memtx tuple arena...
+2025-03-27 21:18:26.273 [56044] main/105/interactive memtx_engine.cc:1750 I> Actual slab_alloc_factor calculated on the basis of desired slab_alloc_factor = 1.044274
+2025-03-27 21:18:26.273 [56044] main/105/interactive tuple.c:411 I> mapping 134217728 bytes for vinyl tuple arena...
+2025-03-27 21:18:26.275 [56044] main/105/interactive box.cc:2274 I> update replication_synchro_quorum = 1
+2025-03-27 21:18:26.275 [56044] main/105/interactive box.cc:3329 I> The option replication_synchro_queue_max_size will actually take effect after the recovery is finished
+2025-03-27 21:18:26.275 [56044] main/105/interactive box.cc:5439 I> instance uuid ace93582-d61f-42ca-835f-caf0dc31c5bf
+2025-03-27 21:18:26.275 [56044] main/105/interactive evio.c:364 E> tx_binary: failed to bind on 127.0.0.1:3301: bind, called on fd 19, aka 127.0.0.1:3301: Address already in use
+2025-03-27 21:18:26.275 [56044] main/105/interactive evio.c:368 E> SocketError: tx_binary: failed to bind, called on fd -1: Address already in use
+2025-03-27 21:18:26.275 [56044] main/105/interactive box.cc:5987 F> can't initialize storage: tx_binary: failed to bind, called on fd -1: Address already in use
+Watchdog 2025/03/27 21:18:26 (WARN): "exit status 1".
+Watchdog 2025/03/27 21:18:26 (INFO): the Instance has shutdown.
+Watchdog 2025/03/27 21:20:55 [INFO] Start
+Watchdog 2025/03/27 21:20:55 (INFO): using "/Users/royalblue/Documents/learning/votingbot/vote_db/config.yml" cluster config for instance "instance001"
+started
+2025-03-27 21:20:55.124 [56612] main/105/interactive main.cc:498 I> Tarantool 3.3.1-0-g91caac3 Darwin-arm64-Release
+2025-03-27 21:20:55.124 [56612] main/105/interactive main.cc:500 I> log level 5 (INFO)
+2025-03-27 21:20:55.124 [56612] main/105/interactive gc.c:131 I> wal/engine cleanup is paused
+2025-03-27 21:20:55.124 [56612] main/105/interactive tuple.c:411 I> mapping 268435456 bytes for memtx tuple arena...
+2025-03-27 21:20:55.124 [56612] main/105/interactive memtx_engine.cc:1750 I> Actual slab_alloc_factor calculated on the basis of desired slab_alloc_factor = 1.044274
+2025-03-27 21:20:55.124 [56612] main/105/interactive tuple.c:411 I> mapping 134217728 bytes for vinyl tuple arena...
+2025-03-27 21:20:55.125 [56612] main/105/interactive box.cc:2274 I> update replication_synchro_quorum = 1
+2025-03-27 21:20:55.125 [56612] main/105/interactive box.cc:3329 I> The option replication_synchro_queue_max_size will actually take effect after the recovery is finished
+2025-03-27 21:20:55.125 [56612] main/105/interactive box.cc:5439 I> instance uuid b15f7429-844a-4af1-8279-0376614ab002
+2025-03-27 21:20:55.125 [56612] main/105/interactive evio.c:269 I> tx_binary: bound to 127.0.0.1:3301
+2025-03-27 21:20:55.125 [56612] main/105/interactive memtx_engine.cc:718 I> initializing an empty data directory
+2025-03-27 21:20:55.149 [56612] main/105/interactive replication.cc:564 I> assigned id 1 to replica b15f7429-844a-4af1-8279-0376614ab002
+2025-03-27 21:20:55.149 [56612] main/105/interactive replication.cc:582 I> assigned name instance001 to replica b15f7429-844a-4af1-8279-0376614ab002
+2025-03-27 21:20:55.149 [56612] main/105/interactive box.cc:2274 I> update replication_synchro_quorum = 1
+2025-03-27 21:20:55.149 [56612] main/105/interactive alter.cc:4163 I> replicaset uuid b20a0a51-4c76-458a-a23d-00078c6cf5b4
+2025-03-27 21:20:55.149 [56612] main/105/interactive alter.cc:4176 I> replicaset name: replicaset001
+2025-03-27 21:20:55.149 [56612] snapshot/101/main memtx_engine.cc:1063 I> saving snapshot `/Users/royalblue/Documents/learning/votingbot/vote_db/var/lib/instance001/00000000000000000000.snap.inprogress'
+2025-03-27 21:20:55.150 [56612] snapshot/101/main memtx_engine.cc:1165 I> done
+2025-03-27 21:20:55.150 [56612] main/105/interactive box.cc:5936 I> ready to accept requests
+2025-03-27 21:20:55.150 [56612] main/107/gc gc.c:319 I> wal/engine cleanup is resumed
+2025-03-27 21:20:55.150 [56612] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'instance_name' configuration option to "instance001"
+2025-03-27 21:20:55.150 [56612] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'custom_proc_title' configuration option to "tarantool - instance001"
+2025-03-27 21:20:55.150 [56612] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'log_nonblock' configuration option to false
+2025-03-27 21:20:55.150 [56612] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'listen' configuration option to [{"uri":"127.0.0.1:3301"}]
+2025-03-27 21:20:55.150 [56612] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'replication' configuration option to []
+2025-03-27 21:20:55.150 [56612] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'replicaset_name' configuration option to "replicaset001"
+2025-03-27 21:20:55.150 [56612] main/108/checkpoint_daemon gc.c:643 I> scheduled next checkpoint for Thu Mar 27 22:51:11 2025
+2025-03-27 21:20:55.150 [56612] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'metrics' configuration option to {"labels":{"alias":"instance001"},"include":["all"],"exclude":[]}
+2025-03-27 21:20:55.151 [56612] main/118/sync_credentials/tarantool.config log.lua:130 W> box.schema.user.grant("sampleuser", "read,write", "space", "polls") has failed because either the object has not been created yet, a database schema upgrade has not been performed, or the privilege write has failed (separate alert reported)
+2025-03-27 21:20:55.162 [56612] main/105/interactive evio.c:516 I> tx_binary: stopped
+2025-03-27 21:20:55.162 [56612] main/105/interactive evio.c:269 I> tx_binary: bound to [::]:3301
+2025-03-27 21:20:55.162 [56612] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'listen' configuration option to 3301
+2025-03-27 21:20:55.163 [56612] main main.cc:1075 I> entering the event loop
+Watchdog 2025/03/27 21:23:11 [INFO] Start
+Watchdog 2025/03/27 21:23:11 (INFO): using "/Users/royalblue/Documents/learning/votingbot/vote_db/config.yml" cluster config for instance "instance001"
+started
+2025-03-27 21:23:11.548 [57194] main/105/interactive main.cc:498 I> Tarantool 3.3.1-0-g91caac3 Darwin-arm64-Release
+2025-03-27 21:23:11.548 [57194] main/105/interactive main.cc:500 I> log level 5 (INFO)
+2025-03-27 21:23:11.548 [57194] main/105/interactive gc.c:131 I> wal/engine cleanup is paused
+2025-03-27 21:23:11.548 [57194] main/105/interactive tuple.c:411 I> mapping 268435456 bytes for memtx tuple arena...
+2025-03-27 21:23:11.549 [57194] main/105/interactive memtx_engine.cc:1750 I> Actual slab_alloc_factor calculated on the basis of desired slab_alloc_factor = 1.044274
+2025-03-27 21:23:11.549 [57194] main/105/interactive tuple.c:411 I> mapping 134217728 bytes for vinyl tuple arena...
+2025-03-27 21:23:11.549 [57194] main/105/interactive/box.upgrade upgrade.lua:1591 I> Recovering snapshot with schema version 3.3.0
+2025-03-27 21:23:11.550 [57194] main/105/interactive box.cc:2274 I> update replication_synchro_quorum = 1
+2025-03-27 21:23:11.550 [57194] main/105/interactive box.cc:3329 I> The option replication_synchro_queue_max_size will actually take effect after the recovery is finished
+2025-03-27 21:23:11.550 [57194] main/105/interactive box.cc:5524 I> instance uuid b15f7429-844a-4af1-8279-0376614ab002
+2025-03-27 21:23:11.550 [57194] main/105/interactive box.cc:5553 I> instance vclock {1: 8}
+2025-03-27 21:23:11.550 [57194] main/105/interactive evio.c:269 I> tx_binary: bound to 127.0.0.1:3301
+2025-03-27 21:23:11.550 [57194] main/105/interactive memtx_engine.cc:286 I> recovery start
+2025-03-27 21:23:11.550 [57194] main/105/interactive memtx_engine.cc:291 I> recovering from `/Users/royalblue/Documents/learning/votingbot/vote_db/var/lib/instance001/00000000000000000000.snap'
+2025-03-27 21:23:11.551 [57194] main/105/interactive alter.cc:4176 I> replicaset name: replicaset001
+2025-03-27 21:23:11.551 [57194] main/105/interactive alter.cc:4163 I> replicaset uuid b20a0a51-4c76-458a-a23d-00078c6cf5b4
+2025-03-27 21:23:11.568 [57194] main/105/interactive replication.cc:564 I> assigned id 1 to replica b15f7429-844a-4af1-8279-0376614ab002
+2025-03-27 21:23:11.568 [57194] main/105/interactive replication.cc:582 I> assigned name instance001 to replica b15f7429-844a-4af1-8279-0376614ab002
+2025-03-27 21:23:11.568 [57194] main/105/interactive box.cc:2274 I> update replication_synchro_quorum = 1
+2025-03-27 21:23:11.568 [57194] main/105/interactive recovery.cc:370 I> recover from `/Users/royalblue/Documents/learning/votingbot/vote_db/var/lib/instance001/00000000000000000000.xlog'
+2025-03-27 21:23:11.569 [57194] main/105/interactive recovery.cc:162 W> file `/Users/royalblue/Documents/learning/votingbot/vote_db/var/lib/instance001/00000000000000000000.xlog` wasn't correctly closed
+2025-03-27 21:23:11.569 [57194] main/105/interactive box.cc:5936 I> ready to accept requests
+2025-03-27 21:23:11.569 [57194] main/105/interactive box.cc:588 I> leaving orphan mode
+2025-03-27 21:23:11.569 [57194] main/107/gc gc.c:319 I> wal/engine cleanup is resumed
+2025-03-27 21:23:11.569 [57194] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'instance_name' configuration option to "instance001"
+2025-03-27 21:23:11.569 [57194] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'custom_proc_title' configuration option to "tarantool - instance001"
+2025-03-27 21:23:11.569 [57194] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'log_nonblock' configuration option to false
+2025-03-27 21:23:11.569 [57194] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'listen' configuration option to [{"uri":"127.0.0.1:3301"}]
+2025-03-27 21:23:11.569 [57194] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'replication' configuration option to []
+2025-03-27 21:23:11.569 [57194] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'replicaset_name' configuration option to "replicaset001"
+2025-03-27 21:23:11.569 [57194] main/108/checkpoint_daemon gc.c:643 I> scheduled next checkpoint for Thu Mar 27 23:22:44 2025
+2025-03-27 21:23:11.569 [57194] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'metrics' configuration option to {"labels":{"alias":"instance001"},"include":["all"],"exclude":[]}
+2025-03-27 21:23:11.576 [57194] main/105/interactive box.cc:2274 I> update replication_synchro_quorum = 1
+2025-03-27 21:23:11.577 [57194] main/108/checkpoint_daemon gc.c:643 I> scheduled next checkpoint for Thu Mar 27 22:41:30 2025
+2025-03-27 21:23:11.588 [57194] main/105/interactive evio.c:516 I> tx_binary: stopped
+2025-03-27 21:23:11.589 [57194] main/105/interactive evio.c:269 I> tx_binary: bound to [::]:3301
+2025-03-27 21:23:11.589 [57194] main/105/interactive/box.load_cfg load_cfg.lua:942 I> set 'listen' configuration option to 3301
+2025-03-27 21:23:11.589 [57194] main main.cc:1075 I> entering the event loop
+2025-03-27 22:41:30.583 [57194] snapshot/101/main memtx_engine.cc:1063 I> saving snapshot `/Users/royalblue/Documents/learning/votingbot/vote_db/var/lib/instance001/00000000000000000012.snap.inprogress'
+2025-03-27 22:41:30.585 [57194] snapshot/101/main memtx_engine.cc:1165 I> done
+2025-03-27 22:41:30.586 [57194] main/108/checkpoint_daemon gc.c:643 I> scheduled next checkpoint for Thu Mar 27 23:41:30 2025

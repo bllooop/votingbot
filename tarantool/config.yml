@@ -1,0 +1,20 @@
+credentials:
+  users:
+    voter:
+      password: '54321'
+      privileges:
+      - permissions: [ read, write ]
+        spaces: [ polls ]
+
+groups:
+  group001:
+    replicasets:
+      replicaset001:
+        instances:
+          instance001:
+            iproto:
+              listen:
+              - uri: '127.0.0.1:3301'
+
+app:
+  file: 'myapp.lua'

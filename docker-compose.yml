@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  votingbot:
+    build: 
+      context: .
+      dockerfile: Dockerfile  
+    ports:
+      - 8080:8080
+    networks:
+      - vote_network
+    depends_on:
+      - tarantool
+    environment:
+      - DB_PASSWORD=54321
+  tarantool:
+    image: tarantool/tarantool:latest
+    container_name: tarantool
+    restart: unless-stopped
+    ports:
+      - "3301:3301"
+    environment:
+      TARANTOOL_USER_NAME: voter
+      TARANTOOL_USER_PASSWORD: 54321
+    volumes:
+      - ./init.lua:/etc/tarantool/init.lua
+      - ./tt.yaml:/etc/tarantool/tt.yaml
+      - tarantool-data:/var/lib/tarantool
+    command: ["tarantool", "/etc/tarantool/init.lua"]
+    networks:
+      - vote_network
+
+networks:
+  vote_network:
+    name: vote_network
+    driver: bridge
+
+volumes:
+  tarantool-data:
+    driver: local

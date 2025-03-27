@@ -1,0 +1,5 @@
+port: "8080"
+db:
+    host: "tarantool" 
+    port: "3301"
+    username: "voter"
