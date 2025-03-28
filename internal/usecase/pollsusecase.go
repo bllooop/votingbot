@@ -14,7 +14,7 @@ func NewPollsUsecase(repo *repository.Repository) *PollsUsecase {
 		repo: repo,
 	}
 }
-func (s *PollsUsecase) CreateDB(question string, options []string, creatorId string) (string, error) {
+func (s *PollsUsecase) CreateDB(question string, options []string, creatorId string) (string, []string, error) {
 	return s.repo.CreateDB(question, options, creatorId)
 }
 func (s *PollsUsecase) CastDB(pollID string, option string) error {

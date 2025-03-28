@@ -5,6 +5,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile  
+    restart: unless-stopped
     ports:
       - 8080:8080
     networks:
@@ -29,6 +30,11 @@ services:
     command: ["tarantool", "/etc/tarantool/init.lua"]
     networks:
       - vote_network
+    healthcheck:
+      test: ["CMD", "tarantool", "-e", "os.exit(0)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   vote_network:

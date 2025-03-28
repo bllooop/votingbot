@@ -2,7 +2,6 @@ package repository
 
 import (
 	"fmt"
-	"strconv"
 
 	"github.com/bllooop/votingbot/internal/domain"
 	logger "github.com/bllooop/votingbot/pkg/logging"
@@ -20,19 +19,19 @@ func NewPollsTarantool(db *tarantool.Connection) *PollsTarantool {
 	}
 }
 
-func (r *PollsTarantool) CreateDB(question string, options []string, creatorId string) (string, error) {
+func (r *PollsTarantool) CreateDB(question string, options []string, creatorId string) (string, []string, error) {
 	pollID := uuid.New().String()
 	votes := make([]int, len(options))
 	data, err := r.db.Do(
 		tarantool.NewInsertRequest("polls").Tuple([]interface{}{pollID, question, options, creatorId, votes, "active"})).Get()
 	if err != nil {
-		return "", err
+		return "", nil, err
 	}
 	if len(data) == 0 {
-		return "", fmt.Errorf("ошибка добавления голосования")
+		return "", nil, fmt.Errorf("ошибка добавления голосования")
 	}
 	logger.Log.Debug().Any("poll_id", pollID).Msg("Создано голосование ID:")
-	return pollID, nil
+	return pollID, options, nil
 }
 
 func (r *PollsTarantool) CastDB(pollID string, option string) error {
@@ -75,24 +74,8 @@ func (r *PollsTarantool) CastDB(pollID string, option string) error {
 	var votes []int
 	for _, v := range votesInterface {
 		switch v := v.(type) {
-		case int:
-			votes = append(votes, v)
 		case int8:
 			votes = append(votes, int(v))
-		case int16:
-			votes = append(votes, int(v))
-		case int32:
-			votes = append(votes, int(v))
-		case int64:
-			votes = append(votes, int(v))
-		case float64:
-			votes = append(votes, int(v))
-		case string:
-			intVal, err := strconv.Atoi(v)
-			if err != nil {
-				return fmt.Errorf("некорректный формат данных счета голосов: %v", v)
-			}
-			votes = append(votes, intVal)
 		default:
 			return fmt.Errorf("некорректный формат данных счета голосов: %T", v)
 		}
@@ -146,11 +129,8 @@ func (r *PollsTarantool) GetRes(pollID string) (domain.Results, error) {
 		return nil, fmt.Errorf("голосование с ID %s не найдено", pollID)
 	}
 
-	logger.Log.Debug().Any("raw_data", data).Msg("Данные из tarantool")
-
 	var results domain.Results
 	for _, rawRow := range data {
-		logger.Log.Debug().Any("row", rawRow).Msg("Данные из tarantool")
 
 		row, ok := rawRow.([]interface{})
 		if !ok || len(row) < 6 {
@@ -180,15 +160,7 @@ func (r *PollsTarantool) GetRes(pollID string) (domain.Results, error) {
 		if okVotes {
 			for _, v := range votesRaw {
 				switch v := v.(type) {
-				case int:
-					votes = append(votes, v)
 				case int8:
-					votes = append(votes, int(v))
-				case int16:
-					votes = append(votes, int(v))
-				case int32:
-					votes = append(votes, int(v))
-				case int64:
 					votes = append(votes, int(v))
 				default:
 					logger.Log.Error().Msgf("Некорректный тип голосов: %T, значение: %v", v, v)
@@ -204,11 +176,7 @@ func (r *PollsTarantool) GetRes(pollID string) (domain.Results, error) {
 		}
 
 		for i, option := range options {
-			results = append(results, struct {
-				Question string `json:"question"`
-				Option   string `json:"option"`
-				Count    int    `json:"count"`
-			}{
+			results = append(results, domain.Result{
 				Question: question,
 				Option:   option,
 				Count:    votes[i],
@@ -230,14 +198,6 @@ func (r *PollsTarantool) CloseDB(pollID string, creatorId string) error {
 		return fmt.Errorf("только создатель может закрыть голосование")
 	}
 
-	_, err = r.db.Do(
-		tarantool.NewUpdateRequest("polls").
-			Key([]interface{}{pollID}).
-			Operations(tarantool.NewOperations().Assign(5, "Closed")),
-	).Get()
-	if err != nil {
-		return err
-	}
 	data, err := r.db.Do(
 		tarantool.NewUpdateRequest("polls").
 			Key([]interface{}{pollID}).

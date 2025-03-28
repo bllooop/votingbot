@@ -51,41 +51,45 @@ func (h *Handler) createPoll(c *gin.Context, req domain.MattermostRequest, args 
 		newErrorResponse(c, http.StatusBadRequest, "Ошибка: нужно указать вопрос и хотя бы два варианта ответа")
 		return
 	}
-	question := args[0]
-	var options []string
+	text := strings.Join(args[0:], " ")
 	questionEnded := false
-	for i := 1; i < len(args); i++ {
-		if !questionEnded && strings.HasSuffix(args[i], "?") {
-			question += " " + args[i]
+	var question, optionsText string
+
+	for _, word := range strings.Fields(text) {
+		if !questionEnded && strings.HasSuffix(word, "?") {
+			question += " " + word
 			questionEnded = true
 		} else if questionEnded {
-			options = append(options, args[i])
+			optionsText += " " + word
 		} else {
-			question += " " + args[i]
+			question += " " + word
 		}
 	}
-	optionsText := req.Text
+
+	question = strings.TrimSpace(question)
+
 	optionsList := strings.Split(optionsText, ",")
-	options = nil
-	for i := range optionsList {
-		optionsList[i] = strings.TrimSpace(optionsList[i])
+	var options []string
+
+	for _, option := range optionsList {
+		option = strings.TrimSpace(option)
+		if option != "" {
+			options = append(options, option)
+		}
 	}
 
 	if len(optionsList) < 2 {
 		newErrorResponse(c, http.StatusBadRequest, "Ошибка: необходимо указать хотя бы два варианта ответа")
 		return
 	}
-
-	options = append(options, optionsList...)
-
 	logger.Log.Info().Msgf("Получен запрос на создание голосования с данными %s, %s", question, options)
-	pollID, err := h.Usecases.Polls.CreateDB(question, options, req.UserID)
+	pollID, options, err := h.Usecases.Polls.CreateDB(question, options, req.UserID)
 	if err != nil {
 		logger.Log.Error().Err(err).Msg("")
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	responseText := fmt.Sprintf("Голосование создано! ID: %s", pollID)
+	responseText := fmt.Sprintf("Голосование создано! ID: %s, Варианты ответов: %s", pollID, options)
 	c.JSON(http.StatusOK, domain.MattermostResponse{
 		ResponseType: "in_channel",
 		Text:         responseText,

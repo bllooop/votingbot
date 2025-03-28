@@ -6,7 +6,7 @@ import (
 )
 
 type Polls interface {
-	CreateDB(question string, options []string, creatorId string) (string, error)
+	CreateDB(question string, options []string, creatorId string) (string, []string, error)
 	CastDB(pollID string, option string) error
 	GetRes(pollID string) (domain.Results, error)
 	CloseDB(pollID string, creatorId string) error
