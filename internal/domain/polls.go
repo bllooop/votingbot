@@ -13,9 +13,10 @@ type MattermostResponse struct {
 }
 
 type Result struct {
-	Question string `json:"question"`
-	Option   string `json:"option"`
-	Count    int    `json:"count"`
+	Question  string `json:"question"`
+	Option    string `json:"option"`
+	Count     int    `json:"count"`
+	ExpiresAt string `json:"expires_at"`
 }
 
 type Results []Result

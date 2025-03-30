@@ -30,7 +30,7 @@ func (r *PollsTarantool) CreateDB(question string, options []string, creatorId s
 	if len(data) == 0 {
 		return "", nil, fmt.Errorf("ошибка добавления голосования")
 	}
-	logger.Log.Debug().Any("poll_id", pollID).Msg("Создано голосование ID:")
+	logger.Log.Debug().Any("data", data).Msg("Создано голосование")
 	return pollID, options, nil
 }
 
@@ -50,6 +50,10 @@ func (r *PollsTarantool) CastDB(pollID string, option string) error {
 	pollData, ok := resp[0].([]interface{})
 	if !ok || len(pollData) < 5 {
 		return fmt.Errorf("некорректный формат данных")
+	}
+	status, _ := pollData[5].(string)
+	if status == "closed" {
+		return fmt.Errorf("голосование с ID %s уже закрыто", pollID)
 	}
 
 	optionsInterface, ok1 := pollData[2].([]interface{})
@@ -197,11 +201,15 @@ func (r *PollsTarantool) CloseDB(pollID string, creatorId string) error {
 	if !ok || creatorID != creatorId {
 		return fmt.Errorf("только создатель может закрыть голосование")
 	}
+	status, _ := pollData[5].(string)
+	if status == "closed" {
+		return fmt.Errorf("голосование с ID %s уже закрыто", pollID)
+	}
 
 	data, err := r.db.Do(
 		tarantool.NewUpdateRequest("polls").
 			Key([]interface{}{pollID}).
-			Operations(tarantool.NewOperations().Assign(5, "Closed")),
+			Operations(tarantool.NewOperations().Assign(5, "closed")),
 	).Get()
 	if err != nil {
 		return err
@@ -220,7 +228,7 @@ func (r *PollsTarantool) DeleteDB(pollID string, creatorId string) error {
 		return fmt.Errorf("только создатель может удалить голосование")
 	}
 
-	_, err = r.db.Do(
+	data, err := r.db.Do(
 		tarantool.NewDeleteRequest("polls").
 			Key([]interface{}{pollID}),
 	).Get()
@@ -228,7 +236,7 @@ func (r *PollsTarantool) DeleteDB(pollID string, creatorId string) error {
 		return err
 	}
 
-	logger.Log.Debug().Msg("Голосование удалено")
+	logger.Log.Debug().Any("data", data).Msg("Голосование удалено")
 	return nil
 }
 
